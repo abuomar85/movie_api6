@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+}
+
+table.center {
+  margin-left: auto; 
+  margin-right: auto;
+  width: 100%;
+}
+    </style>
+    <title>Documentation</title>
+</head>
+<body>
+    <h1>Documentation</h1>
+    <h2>URL endpoints </h2>
+    <table class="center">
+        <tr>
+            <th>Buisness Logic</th>
+            <th>URL</th> 
+            <th>HTTP Method</th>
+            <th>Request body data format</th>
+            <th>Response body data format</th>
+        </tr>
+
+        <tr>
+            <td>Get a list of movies</td>
+            <td>/movies</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>a JSON object holding data about all movies </td>
+        </tr>
+
+        <tr>
+            <td>Get data about a single movie by name</td>
+            <td>/movies/[Name]</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>a JSON object holding data about single movie , containing ID, name , genre Example 
+                <br> { <br> id:1 <br>  name: "frindes", <br> genre: { comedy <br> } <br> }
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>Add a movie</td>
+            <td>/movies</td>
+            <td>POST</td>
+            <td>A JSON object holding data about the movie to add, structured like <br> { <br> name: "Brave Heart", <br> genre:{ <br> Action <br> }  } </td>
+            <td>a JSON object holding data about single movie , containing ID, name , genre Example 
+                <br> { <br> id:2 <br>  name: "Brave Heart", <br> genre: { Action <br> } <br> }
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>Remove a movie by ID</td>
+            <td>/movies/[ID]</td>
+            <td>DELETE</td>
+            <td>None </td>
+            <td>a text message indicating wheter the movie was successfully removed</td>
+        </tr>
+
+        <tr>
+            <td>Update a movie genre </td>
+            <td>/movies/Name/genre</td>
+            <td>PUT</td>
+            <td>None </td>
+            <td>a text message indicating wheter the genre was successfully updated</td>
+        </tr>
+
+        <tr>
+            <td>Get all users</td>
+            <td>/users</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>a JSON object holding data about all users </td>
+        </tr>
+
+        <tr>
+            <td>Get data about a single user by name</td>
+            <td>/users/[Username]</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>a JSON object holding data about single user , containing ID, Username , Password 
+                <br> { <br> id:1 <br>  name: "john doe", <br> password: { secretpass <br> Email: "john@gmail.com" } <br> 
+                birthday: 01.01.1990 <br>
+                Favoritemovies: ["movieId1" , "movieId2"] <br>}
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>Add a new user</td>
+            <td>/users</td>
+            <td>POST</td>
+            <td>A JSON object holding data about the user to add, structured like <br> { <br> Username: "Johne Doe", <br> Password:{ testPass  } <br> } </td>
+            <td>JSON object holding user information { <br> "id": "id value" <br> "Username": "Johne Doe" <br> "Password": "testPass" 
+                <br> "Email": "johndoe@gmail.com" <br> "Birthday" : "01.01.1953" <br> "Favoritemovies" : ["movieID2", "movieID3"] <br>
+                }</td>
+        </tr>
+
+        <tr>
+            <td>Update user using username </td>
+            <td>/users/username/</td>
+            <td>PUT</td>
+            <td>{"updated data" : "updated value"} </td>
+            
+            <td>a JSON object holding data about single user , containing ID, Username , Password
+                <br> { <br> id:2 <br>  name: "updated username", <br> Password: { updated password <br> } <br> }
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>Add movie to user's Favoritemovies </td>
+            <td>/users/username/movies/movieID</td>
+            <td>POST</td>
+            <td>None</td>
+            
+            <td>a JSON object holding all data about the user and his Favoritemovies
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>delete movie from user's Favoritemovies </td>
+            <td>/users/username/movies/movieID</td>
+            <td>DELETE</td>
+            <td>None</td>
+            
+            <td>a JSON object holding all data about the user and his Favoritemovies
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>Delete a user by username</td>
+            <td>/users/Username</td>
+            <td>DELETE</td>
+            <td>None </td>
+            <td>a text message indicating whether the user was successfully deleted or not</td>
+        </tr>
+
+        <tr>
+            <td>get a Genre</td>
+            <td>/genres/genreName</td>
+            <td>GET</td>
+            <td>None </td>
+            <td>JOSN Object holding all availble genres with description: { <br> "Name": "Drama" <br> "Description": " drama film is ... " <br> } </td>
+        </tr>
+
+        <tr>
+            <td>get a Director</td>
+            <td>/directors/directorName</td>
+            <td>GET</td>
+            <td>None </td>
+            <td>JOSN Object holding Director information { <br> "Name": "Jonathan Demme" 
+                <br> "Bio": " an American director" <br> "birth":"1944" <br> "Death":"2017" <br>  } </td>
+        </tr>
+
+        <tr>
+            <td>get all movie with specific genre</td>
+            <td>/movies/genres/genreName</td>
+            <td>GET</td>
+            <td>None </td>
+            <td>JOSN Object holding all movies with specific genre</td>
+        </tr>
+
+        <tr>
+            <td>get all movie with specific director</td>
+            <td>/movies/directors/directorName</td>
+            <td>GET</td>
+            <td>None </td>
+            <td>JOSN Object holding all movies with specific director</td>
+        </tr>
+
+        <tr>
+            <td>get all movie with specific Actor</td>
+            <td>/movies/actors/actorName</td>
+            <td>GET</td>
+            <td>None </td>
+            <td>JOSN Object holding all movies with specific actor</td>
+        </tr>
+
+
+        
+    </table>
+
+
+
+    
+</body>
+</html>

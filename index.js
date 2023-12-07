@@ -19,25 +19,20 @@ const express = require('express'),
       app.use(morgan('common'));
       app.use(bodyParser.json());
 
-     mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+      mongoose.connect('mongodb://localhost:27017/moviesDB2', {useNewUrlParser: true, useUnifiedTopology: true});
+//     mongoose.connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 
 
 //the main page of app
-app.get('/' ,(req, res) => {
+/* app.get('/' ,(req, res) => {
   res.send('Welcome to my movie club');
+}); */
+
+app.get('/', (req, res) => {
+  res.sendFile('index.html', {root: __dirname})
 });
 // get all movies 
-/* app.get('/movies', (req, res) => {
-   Movies.find()
-  .then((movies) => {
-    res.status(201).json(movies);
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send('Error: ' + err)
-  });
-}); */
 
 app.get('/movies', passport.authenticate('jwt', {session: false}), async(req, res) => {
   await Movies.find()

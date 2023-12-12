@@ -17,20 +17,23 @@ const jwt = require('jsonwebtoken'),
 
     module.exports = (router) => {
         router.post('/login', (req, res) => {
-            passport.authenticate('local', {session: false}, (error, user, info) => {
-                if(error || !user) {
-                    return res.status(400).json({
-                        message: 'Something is not right ',
-                        user: user
-                    }); 
-                }
-                req.login(user, {session: false}, (error) => {
-                    if(error) {
-                        res.send(error);
-                    }
-                    let token = genereateJWTToken(user.toJSON());
-                    return res.json({user, token});
-                });
-            })(req, res);
+          passport.authenticate('local', { session: false }, (error, user, info) => {
+            if (error) {
+              return res.status(500).json({ message: 'Internal server error' });
+            }
+            if (!user) {
+              // Incorrect username or password
+              return res.status(401).json({ message: 'Invalid username or password' });
+            }
+      
+            req.login(user, { session: false }, (error) => {
+              if (error) {
+                return res.status(500).json({ message: 'Internal server error' });
+              }
+              let token = genereateJWTToken(user.toJSON());
+              return res.json({ user, token });
+            });
+          })(req, res);
         });
-    }
+      };
+      

@@ -210,18 +210,19 @@ app.post('/users',
     }});
 
   // find all movies with specific genre
-  app.get('/movies/genres/:Name', (req, res) => {
-    Movies.find({ 'Genre.Name': req.params.Name })
-      .then((movies) => {
+  app.get('/movies/genres/:Name', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    try {
+        const movies = await Movies.find({ 'Genre.Name': req.params.Name }).exec();
         res.status(200).json(movies);
-      })
-      .catch((err) => {
+    } catch (err) {
         res.status(500).send('Error: ' + err);
-      });
-  });
+    }
+});
+
 
   // find all movies with specific Director 
-  app.get('/movies/directors/:Name', async (req, res) => {
+
+  app.get('/movies/directors/:Name', passport.authenticate('jwt', {session: false}),  async (req, res) => {
     try {
       const movies = await Movies.find({ 'Director.Name': req.params.Name });
   
